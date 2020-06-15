@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="io.renren.modules.generator.dao.KYwOrderDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="io.renren.modules.generator.entity.KYwOrderEntity" id="kYwOrderMap">
+        <result property="id" column="id"/>
+        <result property="tkservicerate" column="tkServiceRate"/>
+        <result property="payprice" column="payPrice"/>
+        <result property="auctionurl" column="auctionUrl"/>
+        <result property="auctionid" column="auctionId"/>
+        <result property="tksharerate" column="tkShareRate"/>
+        <result property="preservicefee" column="preServiceFee"/>
+        <result property="presell" column="preSell"/>
+        <result property="totalalipayfeestring" column="totalAlipayFeeString"/>
+        <result property="createtime" column="createTime"/>
+        <result property="paystatus" column="payStatus"/>
+        <result property="auctiontitle" column="auctionTitle"/>
+        <result property="exshoptitle" column="exShopTitle"/>
+        <result property="realpayfeestring" column="realPayFeeString"/>
+        <result property="relationid" column="relationId"/>
+        <result property="specialid" column="specialId"/>
+        <result property="inviteraccountname" column="inviterAccountName"/>
+        <result property="sharerate" column="shareRate"/>
+        <result property="relationapp" column="relationApp"/>
+        <result property="tkalimmsharerate" column="tkAlimmShareRate"/>
+        <result property="inviterid" column="inviterId"/>
+        <result property="earningtime" column="earningTime"/>
+        <result property="tkbiztag" column="tkBizTag"/>
+        <result property="tk3rdpubsharefee" column="tk3rdPubShareFee"/>
+        <result property="tk3rdtypestr" column="tk3rdTypeStr"/>
+        <result property="exmemberid" column="exMemberId"/>
+        <result property="realpayfee" column="realPayFee"/>
+        <result property="terminaltype" column="terminalType"/>
+        <result property="auctionnum" column="auctionNum"/>
+        <result property="taobaotradeparentid" column="taobaoTradeParentId"/>
+        <result property="exnickname" column="exNickName"/>
+        <result property="tkshareratetostring" column="tkShareRateToString"/>
+        <result property="tkpubsharefeestring" column="tkPubShareFeeString"/>
+        <result property="feestring" column="feeString"/>
+        <result property="discountandsubsidytostring" column="discountAndSubsidyToString"/>
+        <result property="finaldiscounttostring" column="finalDiscountToString"/>
+        <result property="prefinishservicefee" column="preFinishServiceFee"/>
+        <result property="biztype" column="bizType"/>
+        <result property="insertTime" column="insert_time"/>
+    </resultMap>
+
+
+</mapper>
