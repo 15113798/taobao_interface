@@ -11,6 +11,8 @@ import io.renren.common.utils.UrlToMapUtil;
 import io.renren.modules.common.entity.ReNTbkItem;
 import io.renren.modules.common.entity.ReShopItem;
 import io.renren.modules.common.service.TaoBaoService;
+import io.renren.modules.generator.entity.KYwOrderEntity;
+import io.renren.modules.generator.service.KYwOrderService;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import org.apache.commons.collections.MapUtils;
@@ -36,6 +38,8 @@ public class TaoBaoController {
 
     @Autowired
     private TaoBaoService taoBaoService;
+    @Autowired
+    private KYwOrderService kYwOrderService;
 
     /**
      * 获取商品信息
@@ -165,8 +169,8 @@ public class TaoBaoController {
 
     @GetMapping("/getOrderDetail")
     public R getOrderDetail() throws IOException {
-        String urlPath = "https://pub.alimama.com/report/getCPPaymentDetails.json?t=1592233213081&_tb_token_=3b3b7de86305b&startTime=2020-06-15&endTime=2020-06-15&payStatus=&queryType=1&toPage=1&perPageSize=40&jumpType=0";
-        String cookie = "t=4e3ec18c6a73c704160583d476385691; cna=7QQnF5wlCnYCAdzK4dJayAgj; account-path-guide-s1=true; 133709857-payment-time=true; cookie2=13a00fdac9c1160821d4a6b0878597ea; v=0; _tb_token_=3b3b7de86305b; JSESSIONID=889DA26DF040CDC658FB0E66151D1A79; alimamapwag=TW96aWxsYS81LjAgKFdpbmRvd3MgTlQgMTAuMDsgV2luNjQ7IHg2NCkgQXBwbGVXZWJLaXQvNTM3LjM2IChLSFRNTCwgbGlrZSBHZWNrbykgQ2hyb21lLzc1LjAuMzc3MC44MCBTYWZhcmkvNTM3LjM2; cookie32=8e95c26abf561303829e0c022a769b8d; alimamapw=H1xeUApCVAwHWAwGPgZWUgVVBwIHAwACAlpXUgRRVAVUBQIBVwIBVVYGUQYH; cookie31=MTA5MzI3MTI3LHlpbmNodWFvYmluZywxMjQ4ODg1NDNAcXEuY29tLFRC; login=UtASsssmOIJ0bQ%3D%3D; rurl=aHR0cHM6Ly9wdWIuYWxpbWFtYS5jb20v; l=eB_kP5LgQ69kquYUBOfwourza77OSIRAguPzaNbMiOCPOe1M50jRWZxuAwLHC3GVh6WHR3rFMTWQBeYBqIcTUeXD5FNxGjMmn; isg=BDAwaSoFGtRsfMaQ2-xuOWIQAf6CeRTDJbPtvSqB_Ate5dCP0onkU4bTPe2F9cyb";
+        String urlPath = "https://pub.alimama.com/report/getCPPaymentDetails.json?t=1592236947384&_tb_token_=3b3b7de86305b&startTime=2020-06-10&endTime=2020-06-16&payStatus=&queryType=1&toPage=1&perPageSize=40&jumpType=0";
+        String cookie = "t=4e3ec18c6a73c704160583d476385691; cna=7QQnF5wlCnYCAdzK4dJayAgj; account-path-guide-s1=true; 133709857-payment-time=true; cookie2=13a00fdac9c1160821d4a6b0878597ea; v=0; _tb_token_=3b3b7de86305b; JSESSIONID=889DA26DF040CDC658FB0E66151D1A79; alimamapwag=TW96aWxsYS81LjAgKFdpbmRvd3MgTlQgMTAuMDsgV2luNjQ7IHg2NCkgQXBwbGVXZWJLaXQvNTM3LjM2IChLSFRNTCwgbGlrZSBHZWNrbykgQ2hyb21lLzc1LjAuMzc3MC44MCBTYWZhcmkvNTM3LjM2; cookie32=8e95c26abf561303829e0c022a769b8d; alimamapw=H1xeUApCVAwHWAwGPgZWUgVVBwIHAwACAlpXUgRRVAVUBQIBVwIBVVYGUQYH; cookie31=MTA5MzI3MTI3LHlpbmNodWFvYmluZywxMjQ4ODg1NDNAcXEuY29tLFRC; 109327127-payment-time=true; login=UIHiLt3xD8xYTw%3D%3D; l=eB_kP5LgQ69kq8HhBOfwourza77tjIRAguPzaNbMiOCPO35w5eXVWZxuJv8eCnGVh6WHR3rFMTWQBeYBqIcTUeXD5FNxGjMmn; isg=BAkJY6o-s19MaU_rGrM3YvNnGDVjVv2IdKSkZqt-gvAv8ikE86b5Wb0kNFbEqpXA";
         URL url = new URL(urlPath);
         URLConnection conn = url.openConnection();
         conn.setRequestProperty("Cookie", cookie);
@@ -187,7 +191,10 @@ public class TaoBaoController {
         for (int i =0;i<paymentList.size();i++){
             JSONObject paymentObject= paymentList.getJSONObject(i);
             String tilte = paymentObject.getString("auctionTitle");
+
             System.out.println("订单名称："+tilte);
+            KYwOrderEntity orderEntity = (KYwOrderEntity)JSONObject.toBean(paymentObject, KYwOrderEntity.class);
+            kYwOrderService.save(orderEntity);
         }
 
 
